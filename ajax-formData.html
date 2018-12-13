@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+	<script>
+		window.onload = function(){
+			var oBtn = document.querySelector("#btn1")
+			oBtn.onclick = function(){
+				// formData 是一个新的数据容器，可以往后端通过post发送数据。
+				var formData = new FormData();
+				// console.log(formData);
+				formData.set('a',10);
+				formData.set('b',6);
+
+				var xhr = new XMLHttpRequest();
+				// xhr.upload对象
+				// xhr.upload.onload() 文件上传完成
+				// xhr.upload.onprogress()	文件上传进度
+				xhr.open('post', 'back1.php', true);
+				xhr.send(formData);
+
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(( xhr.status>=200 && xhr.status<300 ) || xhr.status==304 ){
+							console.log(xhr.responseText);  //或者xhr.responseHtml
+						}else{
+							alert("出错了")
+						}
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" id="btn1" value="ajax请求">
+</body>
+</html>

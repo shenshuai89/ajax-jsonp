@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax跨域| Access-Control-Allow-Origin 设置为 * </title>
+	<script>
+		window.onload = function(){
+			var oBtn = document.querySelector("#btn1")
+			oBtn.onclick = function(){
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('post', 'http://localhost:8088', true);
+				xhr.send();
+
+				xhr.onreadystatechange = function(){
+					if(xhr.readyState == 4){
+						if(( xhr.status>=200 && xhr.status<300 ) || xhr.status==304 ){
+							console.log(xhr.responseText);  //或者xhr.responseHtml
+						}else{
+							alert("出错了")
+						}
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" id="btn1" value="ajax请求">
+</body>
+</html>

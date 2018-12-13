@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp-使用jquery配置jsonp接口</title>
+	<script src="./js/jquery.js"></script>
+	<!-- <script src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=abc&cb=show"></script> -->
+	<script>
+		$(function(){
+			$("#inp1").on('input',function(){
+				$.ajax({
+					url:"https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su",
+					data:{
+						wd:$('#inp1').val()
+					},
+					// 下面的两个对象为必填
+					dataType:'jsonp',
+					jsonp:'cb',
+					success(json){
+						console.log(json.s)
+						$("#ullist").html('');
+						json.s.forEach(str =>{
+							$('<li>'+str+'</li>').appendTo("#ullist");
+						})
+					},
+					error(){
+						alert('error')
+					}
+				})
+			})
+			
+		})
+	</script>
+</head>
+<body>
+	<input type="text" id="inp1">
+	<ul id="ullist">
+	</ul>
+</body>
+</html>
+<!-- https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=abc&json=1&p=3&cb=Aralic -->

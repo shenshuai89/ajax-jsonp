@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp-使用原生js调用jsonp_server文件的jsonp接口</title>
+	<script type="text/javascript">
+		function show(json){
+			alert(json)
+		}
+	</script>
+	<script>
+	window.onload = function(){
+		var oInput = document.querySelector("#inp1")
+		var oUl = document.querySelector("#ullist")
+
+		oInput.onclick = function(){
+			let oS = document.createElement("script");
+			oS.src = `http://localhost:8088?a=50&b=60&callback=show`
+
+			document.head.append(oS)
+		}
+	}
+	</script>
+</head>
+<body>
+	<input type="button" id="inp1" value="计算">
+</body>
+</html>
+<!-- https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=abc&json=1&p=3&cb=Aralic -->

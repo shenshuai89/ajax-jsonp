@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp-使用原生js调用百度的jsonp接口</title>
+	<script type="text/javascript">
+		function show(json){
+			var oUl = document.querySelector("#ullist")
+
+			oUl.innerHTML = ''
+			json.s.forEach(str => {
+				let oLi = document.createElement('li');
+				oLi.innerHTML = str;
+
+				oUl.append(oLi);
+			})
+		}
+	</script>
+	<!-- <script src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=abc&cb=show"></script> -->
+	<script>
+	window.onload = function(){
+		var oInput = document.querySelector("#inp1")
+		var oUl = document.querySelector("#ullist")
+
+		oInput.oninput = function(){
+			let oS = document.createElement("script");
+			oS.src = `https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=${oInput.value}&cb=show`
+
+			document.head.append(oS)
+		}
+
+
+	}
+	</script>
+</head>
+<body>
+	<input type="text" id="inp1">
+	<ul id="ullist">
+	</ul>
+</body>
+</html>
+<!-- https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=abc&json=1&p=3&cb=Aralic -->
